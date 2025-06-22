@@ -3,7 +3,7 @@
 </script>
 
 <div class="hero min-h-screen">
-  <div class="hero-overlay"></div>
+  <div class="hero-overlay  bg-base-200"></div>
   <div class="hero-content text-neutral-content text-center">
     <div
       class="max-w-md motion-translate-y-in-100 motion-ease-bounce motion-blur-in-md"
