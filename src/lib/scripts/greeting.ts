@@ -1,5 +1,11 @@
-// place files you want to import through the `$lib` alias in this folder.
-export function greeting() {
+/**
+ * Generates a time-based greeting (Good morning, Good afternoon, or Good evening).
+ *
+ * @returns {string} The time-based greeting followed by an exclamation mark.
+ */
+
+
+export default function greeting() {
     const now = new Date();
     const hours = now.getHours();
 

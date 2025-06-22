@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { greeting } from "$lib/index";
+  import  greeting  from "$lib/scripts/greeting";
 </script>
 
 <div class="hero min-h-screen">
