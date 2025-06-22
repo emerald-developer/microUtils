@@ -1,38 +1,38 @@
-# sv
+# App Kit
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+**App Kit** is a collection of everyday applications built with [SvelteKit](https://kit.svelte.dev/). It aims to provide useful tools and utilities in a single, easy-to-use package.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Multiple applications for daily tasks
+- Fast and modern UI powered by SvelteKit
+- Modular and extensible design
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Getting Started
 
-# create a new project in my-app
-npx sv create my-app
-```
+1. **Clone the repository:**
+  ```bash
+  git clone https://github.com/emerald-developer/appKit
+  cd appKit
+  ```
 
-## Developing
+2. **Install dependencies:**
+  ```bash
+  npm install
+  ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+3. **Run the development server:**
+  ```bash
+  npm run dev
+  ```
 
-```bash
-npm run dev
+4. **Open your browser:**
+  Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Contributing
 
-## Building
+Contributions are welcome! Please open issues or submit pull requests.
 
-To create a production version of your app:
+## License
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This project is licensed under the MIT License.

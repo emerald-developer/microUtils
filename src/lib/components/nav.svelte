@@ -53,6 +53,9 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn">Button</a>
+        <a class="btn btn-square bg-base-100 hover:bg-base-200" href="https://github.com/emerald-developer/appKit">
+            <!-- svelte-ignore a11y_missing_attribute -->
+            <img src="/github.svg" width="16" height="16" alt="GitHub Logo" />
+        </a>
     </div>
 </div>
