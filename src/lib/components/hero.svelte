@@ -9,7 +9,7 @@
       class="max-w-md motion-translate-y-in-100 motion-ease-bounce motion-blur-in-md"
     >
       <h1
-        class="mb-5 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 via-secondary to-accent bg-[length:200%] animate-gradient"
+        class="mb-5 text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent bg-[length:200%] animate-gradient"
       >
         {greeting()}
       </h1>
