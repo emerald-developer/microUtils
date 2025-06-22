@@ -15,8 +15,8 @@
     
 </script>
 
-<div class="card w-96 shadow-sm">
-    <div class="card-body rounded-xl bg-base-200">
+<div class="card w-96 hover:shadow-[0px_0px_20px_0px_rgba(255,255,255,0.2)] ">
+    <div class="card-body rounded-xl">
       <h2 class="card-title  text-3xl font-bold">
         {cardTitle}
         <Badge badgeType={badgeType} />
