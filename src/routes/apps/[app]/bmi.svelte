@@ -1,6 +1,12 @@
 <script lang=ts>
+<<<<<<< HEAD:src/routes/apps/[app]/bmi.svelte
     import Inputs from "$lib/components/inputs.svelte";
     let mass:number=0,height:number=0,bmi=$state(-1)
+=======
+    import Nav from "$lib/components/nav.svelte";
+    import Inputs from "$lib/components/inputs.svelte";
+    let mass,height,bmi=$state(-1)
+>>>>>>> 54c3b9b (BMI):src/routes/apps/[app]/BMI.svelte
 </script>
 
 <div class="hero bg-base-200 flex-grow overflow-hidden">
