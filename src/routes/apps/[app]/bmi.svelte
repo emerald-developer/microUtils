@@ -1,6 +1,6 @@
 <script lang=ts>
     import Inputs from "$lib/components/inputs.svelte";
-    let mass:number=0,height:number=0,bmi=$state(-1)
+    let mass,height,bmi=$state(-1)
 </script>
 
 <div class="h-screen flex flex-col">
@@ -14,7 +14,7 @@
           </div>
           <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl motion-translate-y-in-100 motion-duration-1500 ">
             <div class="card-body">
-                <Inputs/>
+                <Inputs weight={mass} height={height}/>
             </div>
           </div>
         </div>
