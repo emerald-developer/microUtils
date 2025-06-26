@@ -14,7 +14,7 @@
           </div>
           <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl motion-translate-y-in-100 motion-duration-1500 ">
             <div class="card-body">
-                <Inputs weight={mass} height={height}/>
+                <Inputs/>
             </div>
           </div>
         </div>
