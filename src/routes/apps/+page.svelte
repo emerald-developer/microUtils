@@ -1,9 +1,7 @@
 <script lang="ts">
-    import Nav from "$lib/components/nav.svelte";
     import Card from "$lib/components/card.svelte";
 </script>
 
-<Nav />
 <div
     class="motion-opacity-in-0 motion-translate-y-in-100 motion-blur-in-md overflow-hidden"
 >
