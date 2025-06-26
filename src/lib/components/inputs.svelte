@@ -1,6 +1,6 @@
 <script lang="ts">
-  let weight: number = 0;
-  let height: number = 0;
+  let weight: number;
+  let height: number;
   let bmi: number | null = null;
 
   function getBMI() {
