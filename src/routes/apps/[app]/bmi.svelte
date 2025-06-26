@@ -1,6 +1,5 @@
 <script lang=ts>
     import Inputs from "$lib/components/inputs.svelte";
-    let mass:number=0,height:number=0,bmi=$state(-1)
 </script>
 
 <div class="h-screen flex flex-col">
