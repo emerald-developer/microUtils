@@ -20,7 +20,7 @@
     <p class="fieldset-legend">Enter your mass:</p>
     <input type="number" class="input" placeholder="Enter your mass here" bind:value={weight} />
     <p class="label">(in kilograms)</p>
-    
+
     <p class="fieldset-legend">Enter your height:</p>
     <input type="number" class="input" placeholder="Enter your height here" bind:value={height} />
     <p class="label">(in cms)</p>
