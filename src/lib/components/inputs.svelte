@@ -28,7 +28,13 @@
     <button class="btn btn-primary btn-outline" on:click={getBMI}>Calculate</button>
   </fieldset>
   {#if bmi !== null}
-    <p class="mt-4 text-center font-semibold">Your BMI is: {bmi.toFixed(2)}</p>
-  {/if}
+    <p class="mt-4 text-center font-semibold">Your BMI is: 
+      <span class="text-primary">{bmi.toFixed(2)}</span>
+      {#if bmi < 10}
+        <span class="text-primary"> (u good?)</span>
+      {/if}
+    </p>
+    <p class="mt-4 text-center font-semibold text-accent">Scroll down to see more info about your BMI</p>
+      {/if}
 </div>
 
