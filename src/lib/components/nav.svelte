@@ -6,9 +6,9 @@
 
 <div class="navbar bg-base-200 shadow-sm">
     <div class="navbar-start">
-        <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <img src="/logo.png" alt="">
+        <div class="dropdown lg:hidden">
+            <div tabindex="0" role="button" class="btn btn-ghost ">
+                <img src="/logo.png" class="w-[1.5rem] h-[1.5rem]" alt="">
             </div>
             <ul
                 tabindex="0"
@@ -21,7 +21,7 @@
 			</ul>
         </div>
 
-        <div class="btn btn-ghost text-xl text-white">
+        <div class="btn btn-ghost text-xl text-white hidden lg:flex">
                             <img class="w-[1.5rem] h-[1.5rem]" src="/logo.png" alt="">
             <p>ToolKit</p>
         </div>
