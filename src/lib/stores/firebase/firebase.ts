@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { writable,readable } from "svelte/store";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -19,7 +19,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-export const firebaseStore = writable({
+export const firebaseStore = readable({
   app,
   db,
   auth,
