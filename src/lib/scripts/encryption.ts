@@ -1,36 +1,75 @@
-import { createCipheriv, createDecipheriv, randomBytes, pbkdf2Sync } from 'crypto';
+/**
+ * Provides AES-256-CBC encryption and decryption utilities using password-based key derivation.
+ * Browser-compatible using Web Crypto API.
+ */
 
-const algorithm = 'aes-256-cbc'; // AES encryption algorithm
-const salt = randomBytes(16); // Generate a random salt for key derivation
-const iterations = 100000; // Number of iterations for PBKDF2
-const keyLength = 32; // Key length for AES-256
-const ivLength = 16; // Initialization vector length
-
-function deriveKey(password: string): Buffer {
-    return pbkdf2Sync(password, salt, iterations, keyLength, 'sha256');
+function buf2hex(buffer: ArrayBuffer): string {
+    return Array.prototype.map.call(new Uint8Array(buffer), (x: number) => ('00' + x.toString(16)).slice(-2)).join('');
+}
+function hex2buf(hex: string): ArrayBuffer {
+    const bytes = new Uint8Array(hex.length / 2);
+    for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+    }
+    return bytes.buffer;
 }
 
-export function encrypt(text: string, password: string): string {
-    const iv = randomBytes(ivLength); // Generate a random IV
-    const key = deriveKey(password); // Derive key from password
-
-    const cipher = createCipheriv(algorithm, key, iv);
-    let encrypted = cipher.update(text, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-
-    // Combine salt, iv, and encrypted text for later decryption
-    return `${salt.toString('hex')}:${iv.toString('hex')}:${encrypted}`;
+async function deriveKey(password: string, salt: Uint8Array): Promise<CryptoKey> {
+    const enc = new TextEncoder();
+    const keyMaterial = await window.crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+    );
+    return window.crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt,
+            iterations: 100000,
+            hash: "SHA-256"
+        },
+        keyMaterial,
+        { name: "AES-CBC", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+    );
 }
 
-export function decrypt(encryptedText: string, password: string): string {
-    const [saltHex, ivHex, encrypted] = encryptedText.split(':');
-    const saltBuffer = Buffer.from(saltHex, 'hex');
-    const ivBuffer = Buffer.from(ivHex, 'hex');
-    const key = pbkdf2Sync(password, saltBuffer, iterations, keyLength, 'sha256');
+/**
+ * Encrypts a plaintext string using AES-256-CBC with a password.
+ * Returns a string: `${saltHex}:${ivHex}:${encryptedHex}`
+ */
+export async function encrypt(text: string, password: string): Promise<string> {
+    const enc = new TextEncoder();
+    const salt = window.crypto.getRandomValues(new Uint8Array(16));
+    const iv = window.crypto.getRandomValues(new Uint8Array(16));
+    const key = await deriveKey(password, salt);
 
-    const decipher = createDecipheriv(algorithm, key, ivBuffer);
-    let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
+    const encrypted = await window.crypto.subtle.encrypt(
+        { name: "AES-CBC", iv },
+        key,
+        enc.encode(text)
+    );
 
-    return decrypted;
+    return `${buf2hex(salt)}:${buf2hex(iv)}:${buf2hex(encrypted)}`;
+}
+
+/**
+ * Decrypts a string encrypted by the `encrypt` function using AES-256-CBC and a password.
+ */
+export async function decrypt(encryptedText: string, password: string): Promise<string> {
+    const [saltHex, ivHex, dataHex] = encryptedText.split(':');
+    const salt = new Uint8Array(hex2buf(saltHex));
+    const iv = new Uint8Array(hex2buf(ivHex));
+    const data = new Uint8Array(hex2buf(dataHex)); // <-- fix here
+    const key = await deriveKey(password, salt);
+
+    const decrypted = await window.crypto.subtle.decrypt(
+        { name: "AES-CBC", iv },
+        key,
+        data
+    );
+    return new TextDecoder().decode(decrypted);
 }

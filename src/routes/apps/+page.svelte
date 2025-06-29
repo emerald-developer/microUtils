@@ -13,11 +13,11 @@
                 cardDescription="calculates BMI"
             />
         </a>
-        <a href="/apps/bmi">
+        <a href="/apps/note">
             <Card
-                badgeType="health"
-                cardTitle="BMI calculator"
-                cardDescription="calculates BMI"
+                badgeType="utility"
+                cardTitle="Note"
+                cardDescription="Write and save notes"
             />
         </a>
         <a href="/apps/bmi">
