@@ -20,11 +20,11 @@
                 cardDescription="calculates BMI"
             />
         </a>
-        <a href="/apps/bmi">
+        <a href="/apps/currency">
             <Card
-                badgeType="health"
-                cardTitle="BMI calculator"
-                cardDescription="calculates BMI"
+                badgeType="finance"
+                cardTitle="Cash converter"
+                cardDescription="converts currencies"
             />
         </a>
     </div>
