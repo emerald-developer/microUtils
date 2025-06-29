@@ -18,7 +18,7 @@
   <div class="navbar-start">
     <div class="dropdown lg:hidden">
       <div tabindex="0" role="button" class="btn btn-ghost">
-        <img src="/logo.png" class="w-[1.5rem] h-[1.5rem]" alt="" />
+        <img src="/favicon.png" class="w-[1.5rem] h-[1.5rem]" alt="" />
       </div>
       <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
       <ul
@@ -53,7 +53,7 @@
     </div>
 
     <div class="btn btn-ghost text-xl text-white hidden lg:flex">
-      <img class="w-[1.5rem] h-[1.5rem]" src="/logo.png" alt="" />
+      <img class="w-[1.5rem] h-[1.5rem]" src="/favicon.png" alt="" />
       <p>ToolKit</p>
     </div>
   </div>
