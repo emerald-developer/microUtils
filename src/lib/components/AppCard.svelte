@@ -1,5 +1,5 @@
 <script lang="ts" runes>
-  import Badge from "./badge.svelte";
+  import Badge from "./Badge.svelte";
   let {
     badgeType,
     cardTitle,
