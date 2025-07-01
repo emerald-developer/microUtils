@@ -2,6 +2,7 @@
   import { page } from "$app/state";
   let app = page.params.app;
   import Bmi from "./bmi.svelte";
+  import Compress from "./compress.svelte";
   import Note from "./note.svelte";
 </script>
 
@@ -11,9 +12,9 @@
   <Note />
 {:else if app == "todo"}
   <p>Todo app is under construction.</p>
-  {:else if app == "compress"}
-  <p>File compressor is under construction.</p>
-{:else if app == "converter"}
+{:else if app == "compress"}
+  <Compress />
+{:else if app == "currency"}
   <p>File converter is under construction.</p>
 {:else if app == "calculator"}
   <p>Calculator app is under construction.</p>

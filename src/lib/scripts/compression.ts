@@ -1,23 +1,24 @@
 import * as fflate from 'fflate';
 
-export async function compress(data: Buffer): Promise<Buffer> {
+// Accept Uint8Array or ArrayBuffer, return Uint8Array
+export async function compress(data: Uint8Array | ArrayBuffer): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     try {
-      const compressedData = fflate.deflateSync(data);
-      const buffer = Buffer.from(compressedData); // Convert Uint8Array to Buffer
-      resolve(buffer);
+      const input = data instanceof Uint8Array ? data : new Uint8Array(data);
+      const compressedData = fflate.deflateSync(input);
+      resolve(compressedData);
     } catch (error) {
       reject(error);
     }
   });
 }
 
-export async function decompress(compressedData: Buffer): Promise<Buffer> {
+export async function decompress(compressedData: Uint8Array | ArrayBuffer): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     try {
-      const decompressedData = fflate.inflateSync(compressedData);
-      const buffer = Buffer.from(decompressedData); // Convert Uint8Array to Buffer
-      resolve(buffer);
+      const input = compressedData instanceof Uint8Array ? compressedData : new Uint8Array(compressedData);
+      const decompressedData = fflate.inflateSync(input);
+      resolve(decompressedData);
     } catch (error) {
       reject(error);
     }
