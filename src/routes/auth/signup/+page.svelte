@@ -1,7 +1,6 @@
 <!-- signup page using daisyui -->
 <script>
     import { emailAuth } from '$lib/stores/firebase/auth';
-    import { saveUserProfile } from '$lib/stores/firebase/db';
     import { getAuth, updateProfile } from "firebase/auth";
     let email = '';
     let password = '';
@@ -27,12 +26,6 @@
             await updateProfile(user, {
                 displayName: username,
                 photoURL: avatar || undefined
-            });
-
-            // Save profile data to Firestore
-            await saveUserProfile(user.uid, {
-                username,
-                photoUrl: avatar
             });
 
             successMessage = 'Sign up successful!';

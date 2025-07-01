@@ -32,22 +32,45 @@
 
 <style>
   .animate-conic-gradient {
-    /* Conic gradient background */
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    /* Remove animation from container */
+  }
+
+  .animate-conic-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
     background: conic-gradient(
       from 0deg,
       var(--fallback-b1, #181a20) 0deg,
-      var(--fallback-s, #f472b6) 120deg,
-      var(--fallback-b1, #181a20) 240deg,
-      var(--fallback-s, #f472b6) 360deg
+      var(--fallback-s, #a6f472) 120deg,
+      var(--fallback-s, #873efd) 360deg
     );
-    border-radius: 0.5rem;
-    /* Animate rotation */
     animation: conic-rotate 4s linear infinite;
+  }
+
+  /* Ensure card content is above the gradient */
+  .animate-conic-gradient > * {
+    position: relative;
+    z-index: 1;
   }
 
   @keyframes conic-rotate {
     0% {
       transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(90deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    75% {
+      transform: rotate(270deg);
     }
     100% {
       transform: rotate(360deg);

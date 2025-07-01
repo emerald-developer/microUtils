@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { saveUserProfile } from "$lib/stores/firebase/db";
   import { getAuth, updateProfile } from "firebase/auth";
   export let username: string = "";
   export let photoURL: string = "";
@@ -21,7 +20,6 @@
       return;
     }
     try {
-      await saveUserProfile(currentUser.uid, { username: localUsername, photoUrl: localPhotoURL });
       const auth = getAuth();
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, { displayName: localUsername, photoURL: localPhotoURL });
