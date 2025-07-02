@@ -15,7 +15,7 @@
 {:else if app == "compress"}
   <Compress />
 {:else if app == "currency"}
-  <p>File converter is under construction.</p>
+  <Currency />
 {:else if app == "calculator"}
   <p>Calculator app is under construction.</p>
 {:else}
