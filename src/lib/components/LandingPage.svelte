@@ -27,3 +27,22 @@
     </div>
   </div>
 </div>
+
+<style>
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-move 3s ease-in-out infinite;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+</style>

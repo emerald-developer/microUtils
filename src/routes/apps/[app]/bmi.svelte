@@ -1,5 +1,5 @@
 <script lang=ts>
-    import Inputs from "$lib/components/inputs.svelte";
+    import Inputs from "$lib/components/BMI_Inputs.svelte";
 </script>
 
 <div class="h-screen flex flex-col">
