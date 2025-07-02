@@ -4,8 +4,8 @@
   import Bmi from "./bmi.svelte";
   import Compress from "./compress.svelte";
   import Note from "./note.svelte";
+  import Currency from "./currency.svelte";
 </script>
-
 {#if app == "bmi"}
   <Bmi />
 {:else if app == "note"}

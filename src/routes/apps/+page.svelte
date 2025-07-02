@@ -22,7 +22,7 @@
         </a>
         <a href="/apps/currency">
             <Card
-                badgeType="utility"
+                badgeType="finance"
                 cardTitle="Currency Converter"
                 cardDescription="Converts currencies"
             />
