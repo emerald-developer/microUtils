@@ -62,9 +62,9 @@
 <div class="hero h-max flex-grow">
   <div class="hero-content text-center">
     <div class="max-w-md">
-      <h1 class="text-5xl font-bold">File Compressor</h1>
-      <p class="py-6">Compress your files quickly and easily.</p>
-      <p class="py-6">Choose what file you want to compress.</p>
+      <h1 class="text-5xl font-bold">File {type}</h1>
+      <p class="py-6">Download your {type.toLowerCase() + 'ed'} files quickly and easily.</p>
+      <p class="py-6">Press the button to download the {type.toLowerCase() + 'ed'} file.</p>
       <form
         on:submit|preventDefault={handleSubmit}
         class="grid grid-cols-1 gap-4"
