@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Iso from "$lib/components/iso.svelte";
+    import Iso from "$lib/components/CurrencyCodes.svelte";
 </script>
 
 <div class="hero bg-base-100 flex-grow overflow-hidden">
