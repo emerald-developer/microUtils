@@ -3,6 +3,7 @@
   import { emailAuth } from "$lib/stores/firebase/auth";
   import { getAuth, deleteUser } from "firebase/auth";
   import { getFirestore, doc, deleteDoc } from "firebase/firestore";
+  import { get } from "svelte/store";
   import { firebaseStore } from "$lib/stores/firebase/firebase";
   export let show = false;
   export let currentUser: any = null;
@@ -33,12 +34,18 @@
         confirmEmail,
         confirmPassword
       );
-      const db = getFirestore(firebaseStore.app);
-      await deleteDoc(doc(db, "users", auth.currentUser.uid));
+      const uid = auth.currentUser.uid;
+      const db = getFirestore(get(firebaseStore).app);
+
+      // Delete all associated user data from Firestore before deleting the user account.
+      await deleteDoc(doc(db, 'users', uid, 'note', 'data'));
+      await deleteDoc(doc(db, 'users', uid, 'todo', 'data'));
+      await deleteDoc(doc(db, 'users', uid));
+
       await deleteUser(auth.currentUser);
       deleteMessage = "Your account has been deleted.";
       dispatch("deleted");
-    } catch (error) {
+    } catch (error: any) {
       confirmError =
         error?.message ||
         "Failed to delete account. Please check your credentials.";
