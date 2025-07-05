@@ -1,9 +1,12 @@
 <script lang="ts">
-  import  greeting  from "$lib/scripts/greeting";
+  import greeting from "$lib/scripts/greeting";
 </script>
 
-<div class="hero min-h-screen">
-  <div class="hero-overlay  bg-base-100"></div>
+<div
+  class="hero flex-grow"
+  style="background-image: url(/blob-scene.svg);"
+>
+  <div class="hero-overlay"></div>
   <div class="hero-content text-neutral-content text-center">
     <div
       class="max-w-md motion-translate-y-in-100 motion-ease-bounce motion-blur-in-md"
@@ -18,12 +21,13 @@
         thoughtfully designed to enhance your digital workflow with modern,
         efficient solutions.
       </p>
-      <a href="/apps"
-        ><button
+      <a href="/apps">
+        <button
           class="btn btn-dash btn-accent motion-preset-oscillate-lg motion-paused hover:motion-running"
-          >Explore Apps</button
-        ></a
-      >
+        >
+          Explore Apps
+        </button>
+      </a>
     </div>
   </div>
 </div>

@@ -5,19 +5,64 @@
   import Compress from "./compress.svelte";
   import Note from "./note.svelte";
   import Currency from "./currency.svelte";
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
+  onMount(() => {
+    if (!["bmi", "note", "todo", "compress", "currency", "calculator", "qrcode" , "expense"].includes(app)) {
+      goto("/errors/404");
+    }
+  });
 </script>
 {#if app == "bmi"}
   <Bmi />
 {:else if app == "note"}
   <Note />
-{:else if app == "todo"}
-  <p>Todo app is under construction.</p>
 {:else if app == "compress"}
   <Compress />
 {:else if app == "currency"}
   <Currency />
+{:else if app == "qrcode"}
+  <div class="flex flex-col items-center justify-center flex-grow">
+    <div class="text-7xl font-bold text-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-16 h-16 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z" />
+      </svg>
+      Under Construction
+    </div>
+    <div class="mt-4 text-lg text-base-content/70">The QR Code Generator app is being built. Please check back soon!</div>
+    <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
+  </div>
+{:else if app == "todo"}
+  <div class="flex flex-col items-center justify-center flex-grow">
+    <div class="text-7xl font-bold text-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-16 h-16 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z" />
+      </svg>
+      Under Construction
+    </div>
+    <div class="mt-4 text-lg text-base-content/70">The Todo app is being built. Please check back soon!</div>
+    <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
+  </div>
+{:else if app == "expense"}
+  <div class="flex flex-col items-center justify-center flex-grow">
+    <div class="text-7xl font-bold text-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-16 h-16 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z" />
+      </svg>
+      Under Construction
+    </div>
+    <div class="mt-4 text-lg text-base-content/70">The Expense Tracker app is being built. Please check back soon!</div>
+    <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
+  </div>
 {:else if app == "calculator"}
-  <p>Calculator app is under construction.</p>
-{:else}
-  <p>App not found.</p>
+  <div class="flex flex-col items-center justify-center flex-grow">
+    <div class="text-7xl font-bold text-warning">
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-16 h-16 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z" />
+      </svg>
+      Under Construction
+    </div>
+    <div class="mt-4 text-lg text-base-content/70">The Calculator app is being built. Please check back soon!</div>
+    <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
+  </div>
 {/if}
