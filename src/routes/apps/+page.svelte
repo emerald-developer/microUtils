@@ -34,6 +34,20 @@
                 cardDescription="Compress and decompress files"
             />
         </a>
+        <a href="/apps/encrypt">
+            <Card
+                badgeType="utility"
+                cardTitle="File Encryptor"
+                cardDescription="Encrypt and decrypt files"
+            />
+        </a>
+        <a href="/apps/calculator">
+            <Card
+                badgeType="math"
+                cardTitle="Calculator"
+                cardDescription="Calculate"
+            />
+        </a>
     </div>
 </div>
 
