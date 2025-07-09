@@ -48,6 +48,14 @@
                 cardDescription="Calculate"
             />
         </a>
+        <a href="/apps/clickspeed">
+            <Card
+                badgeType="utility"
+                cardTitle="Click Speed Test"
+                cardDescription="Test your clicking speed"
+            />
+        </a>
+
     </div>
 </div>
 
