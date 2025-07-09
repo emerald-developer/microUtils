@@ -7,8 +7,9 @@
   import Currency from "./currency.svelte";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import Encrypt from "./encrypt.svelte";
   onMount(() => {
-    if (!["bmi", "note", "todo", "compress", "currency", "calculator", "qrcode" , "expense"].includes(app)) {
+    if (!["bmi", "note", "todo", "compress", "currency", "calculator", "qrcode" , "expense", "encrypt"].includes(app)) {
       goto("/errors/404");
     }
   });
@@ -19,6 +20,8 @@
   <Note />
 {:else if app == "compress"}
   <Compress />
+{:else if app == "encrypt"}
+  <Encrypt />
 {:else if app == "currency"}
   <Currency />
 {:else if app == "qrcode"}
