@@ -1,15 +1,16 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
   let app = page.params.app;
   import Bmi from "./bmi.svelte";
   import Compress from "./compress.svelte";
   import Note from "./note.svelte";
   import Currency from "./currency.svelte";
-  import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
+  import ClickSpeed from "./clickspeed.svelte";
   import Encrypt from "./encrypt.svelte";
   onMount(() => {
-    if (!["bmi", "note", "todo", "compress", "currency", "calculator", "qrcode" , "expense", "encrypt"].includes(app)) {
+    if (!["bmi", "note", "todo", "clickspeed", "compress", "currency", "calculator", "qrcode" , "expense", "encrypt"].includes(app)) {
       goto("/errors/404");
     }
   });
@@ -22,6 +23,9 @@
   <Compress />
 {:else if app == "encrypt"}
   <Encrypt />
+{:else if app == "clickspeed"}
+  <ClickSpeed />
+{:else}
 {:else if app == "currency"}
   <Currency />
 {:else if app == "qrcode"}
