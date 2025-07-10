@@ -62,6 +62,13 @@
                 cardDescription="Randomize numbers"
             />
         </a>
+        <a href="/apps/colorpicker">
+            <Card
+                badgeType="utility"
+                cardTitle="Color Picker"
+                cardDescription="Pick a color"
+            />
+        </a>
     </div>
 </div>
 
