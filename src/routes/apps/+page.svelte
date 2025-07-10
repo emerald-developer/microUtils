@@ -55,7 +55,13 @@
                 cardDescription="Test your clicking speed"
             />
         </a>
-
+        <a href="/apps/randomize">
+            <Card
+                badgeType="utility"
+                cardTitle="Randomizer"
+                cardDescription="Randomize numbers"
+            />
+        </a>
     </div>
 </div>
 
