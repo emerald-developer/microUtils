@@ -225,6 +225,7 @@
     }
   }
 
+
   // Update brightness when slider changes
   $: brightness = brightnessSlider / 100;
 
