@@ -232,6 +232,14 @@
   $: hexColor = rgbToHex(pickedColors.red, pickedColors.green, pickedColors.blue);
   $: rgbColor = `rgb(${pickedColors.red}, ${pickedColors.green}, ${pickedColors.blue})`;
   $: hslColor = rgbToHsl(pickedColors.red, pickedColors.green, pickedColors.blue);
+
+  // when i go to another page delete the custom mouse
+  import { onDestroy } from "svelte";
+
+  onDestroy(() => {
+    document.querySelectorAll(".custom-mouse").forEach((el) => el.remove());
+  });
+
 </script>
 
 
