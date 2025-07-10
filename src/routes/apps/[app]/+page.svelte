@@ -9,8 +9,10 @@
   import Currency from "./currency.svelte";
   import ClickSpeed from "./clickspeed.svelte";
   import Encrypt from "./encrypt.svelte";
+  import Randomize from "./randomize.svelte";
+
   onMount(() => {
-    if (!["bmi", "note", "todo", "clickspeed", "compress", "currency", "calculator", "qrcode" , "expense", "encrypt"].includes(app)) {
+    if (!["bmi", "note","randomize", "todo", "clickspeed", "compress", "currency", "calculator", "qrcode" , "expense", "encrypt"].includes(app)) {
       goto("/errors/404");
     }
   });
@@ -25,7 +27,8 @@
   <Encrypt />
 {:else if app == "clickspeed"}
   <ClickSpeed />
-{:else}
+{:else if app == "randomize"}
+  <Randomize />
 {:else if app == "currency"}
   <Currency />
 {:else if app == "qrcode"}
