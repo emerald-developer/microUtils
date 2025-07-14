@@ -1,45 +1,17 @@
-function tokenizer(input: string): string[] {
-  const tokens: string[] = [];
-  let currentToken = '';
-  for (let i = 0; i < input.length; i++) {
-    const char = input[i];
-    if (char === '+' || char === '*' || char === '/'|| char === '^'|| char === '(' || char === ')') {
-      if (currentToken !== '') {
-        tokens.push(currentToken);
-        currentToken = '';
-      }
-      tokens.push(char);
-    } else if (char === ' ') {
-      continue;
-    } else if (char === '-') {
-      if (currentToken === '') {
-        currentToken += char;
-      } else {
-        tokens.push(currentToken);
-        currentToken = char;
-      }
-    }
-     else {
-      currentToken += char;
-    }
-  }
-  return tokens;
-}
-
 class Token{
   value: string;
-  type: 'number' | 'operator' | 'paren';
+  type: "number" | "operator" | "paren";
   precedence?: number;
-  associativity?: 'left' | 'right';
+  associativity?: "left" | "right";
 
   constructor(value: string) {
     this.value = value;
     if (/\d/.test(value)) {
-      this.type = 'number';
-    } else if (value === '(' || value === ')') {
-      this.type = 'paren';
+      this.type = "number";
+    } else if (value === "(" || value === ")") {
+      this.type = "paren";
     } else {
-      this.type = 'operator';
+      this.type = "operator";
       this.precedence = this.getPrecedence();
       this.associativity = this.getAssociativity();
     }
@@ -47,28 +19,27 @@ class Token{
 
   private getPrecedence(): number {
     switch (this.value) {
-      case '+':
-      case '-':
+      case "+":
+      case "-":
         return 2;
-      case '*':
-      case '/':
+      case "*":
+      case "/":
         return 3;
-      case '^':
+      case "^":
         return 4;
       default:
         return 0;
     }
   }
 
-  private getAssociativity(): 'left' | 'right' {
+  private getAssociativity(): "left" | "right" {
     switch (this.value) {
-      case '^':
-        return 'right';
+      case "^":
+        return "right";
       default:
-        return 'left';
+        return "left";
     }
   }
-
 }
 
 class Stack<T> {
@@ -99,7 +70,42 @@ class Stack<T> {
   size(): number {
     return this.elements.length;
   }
-
-
 }
 
+class Tokens {
+  tokens: Token[];
+
+  constructor(expression: string) {
+    this.tokens = this.tokenize(expression);
+  }
+
+  private tokenize(expression: string): Token[] {
+    const tokens: Token[] = [];
+    let i = 0;
+    while (i < expression.length) {
+      const char = expression[i];
+      if (/\s/.test(char)) {
+        i++;
+        continue;
+      }
+
+      if (/\d/.test(char)) {
+        let num = "";
+        while (i < expression.length && (/\d|\./.test(expression[i]))) {
+          num += expression[i];
+          i++;
+        }
+        tokens.push(new Token(num));
+        continue;
+      }
+
+      if ("+-*/^()".includes(char)) {
+        tokens.push(new Token(char));
+        i++;
+        continue;
+      }
+      throw new Error(`Unknown character: ${char}`);
+    }
+    return tokens;
+  }
+}
