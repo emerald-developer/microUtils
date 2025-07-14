@@ -1,6 +1,6 @@
-class Token{
+class Token {
   value: string;
-  type: "number" | "operator" | "paren";
+  type: "number" | "operator" | "leftParenthesis" | "rightParenthesis";
   precedence?: number;
   associativity?: "left" | "right";
 
@@ -8,8 +8,10 @@ class Token{
     this.value = value;
     if (/\d/.test(value)) {
       this.type = "number";
-    } else if (value === "(" || value === ")") {
-      this.type = "paren";
+    } else if (value === "(") {
+      this.type = "leftParenthesis";
+    } else if (value === ")") {
+      this.type = "rightParenthesis";
     } else {
       this.type = "operator";
       this.precedence = this.getPrecedence();
@@ -91,7 +93,7 @@ class Tokens {
 
       if (/\d/.test(char)) {
         let num = "";
-        while (i < expression.length && (/\d|\./.test(expression[i]))) {
+        while (i < expression.length && /\d|\./.test(expression[i])) {
           num += expression[i];
           i++;
         }
@@ -108,4 +110,44 @@ class Tokens {
     }
     return tokens;
   }
+}
+
+function ShuntingYard(tokens: Tokens): Token[] | undefined {
+  const output: Token[] = [];
+  const stack = new Stack<Token>();
+  for (const token of tokens.tokens) {
+    if (token.type === "number") {
+      output.push(token);
+    }
+    if (token.type === "leftParenthesis") {
+      stack.push(token);
+    }
+    if (token.type === "rightParenthesis") {
+      while (stack.peek()?.value !== "(") {
+        output.push(stack.pop()!);
+        if (stack.isEmpty()) {
+          throw new Error("Mismatched parentheses");
+        }
+      }
+      stack.pop();
+    }
+    if (token.type === "operator") {
+      while (
+        !stack.isEmpty() &&
+        stack.peek()?.type === "operator" &&
+        (
+          (stack.peek()!.precedence! > token.precedence!) ||
+          (stack.peek()!.precedence! === token.precedence! &&
+            token.associativity === "left")
+        )
+      ) {
+        output.push(stack.pop()!);
+      }
+      stack.push(token);
+    }
+  }
+  while (!stack.isEmpty()) {
+    output.push(stack.pop()!);
+  }
+  return output;
 }
