@@ -11,6 +11,7 @@
   import Encrypt from "./encrypt.svelte";
   import Randomize from "./randomize.svelte";
   import ColorPicker from "./colorpicker.svelte";
+  import Todo from "./todo.svelte";
 
   onMount(() => {
     if (
@@ -50,6 +51,8 @@
   <Randomize />
 {:else if app == "currency"}
   <Currency />
+{:else if app == "todo"}
+  <Todo/>
 {:else if app == "qrcode"}
   <div class="flex flex-col items-center justify-center flex-grow">
     <div class="text-7xl font-bold text-warning">
@@ -71,30 +74,6 @@
     </div>
     <div class="mt-4 text-lg text-base-content/70">
       The QR Code Generator app is being built. Please check back soon!
-    </div>
-    <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
-  </div>
-{:else if app == "todo"}
-  <div class="flex flex-col items-center justify-center flex-grow">
-    <div class="text-7xl font-bold text-warning">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="inline w-16 h-16 mr-2"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M4 4h16v16H4V4z"
-        />
-      </svg>
-      Under Construction
-    </div>
-    <div class="mt-4 text-lg text-base-content/70">
-      The Todo app is being built. Please check back soon!
     </div>
     <a href="/apps" class="btn btn-outline btn-warning mt-6">Back to Apps</a>
   </div>
