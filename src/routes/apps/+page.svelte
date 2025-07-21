@@ -69,6 +69,14 @@
                 cardDescription="Pick a color"
             />
         </a>
+        <a href="/apps/password">
+            <Card
+                badgeType="utility"
+                cardTitle="Password Generator"
+                cardDescription="Generate a password"
+            />
+        </a>
+
     </div>
 </div>
 
