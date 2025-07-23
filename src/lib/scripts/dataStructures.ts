@@ -1,24 +1,26 @@
 export class Token {
   value: string;
-  type: "number" | "operator" | "leftParenthesis" | "rightParenthesis";
+  type: "number" | "operator" | "unaryMinus" | "leftParenthesis" | "rightParenthesis";
   precedence?: number;
   associativity?: "left" | "right";
 
   constructor(value: string) {
     this.value = value;
-    if (/\d/.test(value)) {
+    if (/\d/.test(value) || (value.startsWith("-") && value.length > 1)) {
       this.type = "number";
     } else if (value === "(") {
       this.type = "leftParenthesis";
     } else if (value === ")") {
       this.type = "rightParenthesis";
+    } else if (value === "_") {
+      this.type = "unaryMinus";
     } else {
       this.type = "operator";
-      this.precedence = this.getPrecedence();
-      this.associativity = this.getAssociativity();
     }
+    this.precedence = this.getPrecedence();
+    this.associativity = this.getAssociativity();
   }
-
+  
   private getPrecedence(): number {
     switch (this.value) {
       case "+":
@@ -28,6 +30,7 @@ export class Token {
       case "/":
         return 3;
       case "^":
+      case "_":
         return 4;
       default:
         return 0;
@@ -37,6 +40,7 @@ export class Token {
   private getAssociativity(): "left" | "right" {
     switch (this.value) {
       case "^":
+      case "_":
         return "right";
       default:
         return "left";
@@ -81,33 +85,47 @@ export class Tokens {
     this.tokens = this.tokenize(expression);
   }
 
-  private tokenize(expression: string): Token[] {
-    const tokens: Token[] = [];
-    let i = 0;
-    while (i < expression.length) {
-      const char = expression[i];
-      if (/\s/.test(char)) {
-        i++;
-        continue;
-      }
-
-      if (/\d/.test(char)) {
-        let num = "";
-        while (i < expression.length && /\d|\./.test(expression[i])) {
-          num += expression[i];
-          i++;
+  private tokenize(input: string): Token[] {
+    let temp = "";
+    let tokens: Token[] = [];
+    for (let i = 0; i < input.length; i++) {
+        if ("0123456789.".indexOf(input[i]) !== -1) {
+            temp += input[i];
         }
-        tokens.push(new Token(num));
-        continue;
-      }
+        else {
+            if (temp.length > 0) {
+                tokens.push(new Token(temp));
+                temp = "";
+            }
+            if (input[i] === "-") {
+                if (input[i + 1] === "(") {
+                    tokens.push(new Token("_"));
+                } else if (i === 0 || "+-*/^(".indexOf(input[i - 1]) !== -1) {
+                    temp += input[i];
+                } else {
+                    tokens.push(new Token(input[i]));
+                }
+                
+            }
+            else if ("+/*^()".indexOf(input[i]) !== -1) {
+                tokens.push(new Token(input[i]));
+            }
+        }
 
-      if ("+-*/^()".includes(char)) {
-        tokens.push(new Token(char));
-        i++;
-        continue;
-      }
-      throw new Error(`Unknown character: ${char}`);
+    }
+    if (temp.length > 0) {
+        tokens.push(new Token(temp));
+        temp = "";
     }
     return tokens;
   }
 }
+
+let x=new Tokens("-32+52*-(22-82)^22/-42");
+let temp=""
+for (const token of x.tokens) {
+  temp += token.value + " ";
+}
+console.log(temp);
+
+// -3 + 5 * - ( 2 - 8 ) ^ 2 / -4

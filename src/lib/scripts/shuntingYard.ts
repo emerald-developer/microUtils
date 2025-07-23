@@ -20,10 +20,23 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
       }
       stack.pop();
     }
-    if (token.type === "operator") {
+    if (token.type === "unaryMinus") {
       while (
         !stack.isEmpty() &&
         stack.peek()?.type === "operator" &&
+        (
+          (stack.peek()!.precedence! > token.precedence!) ||
+          (stack.peek()!.precedence! === token.precedence! &&
+            token.associativity === "left") // Your existing left-associative check is fine here.
+        )
+      ) {
+        output.push(stack.pop()!);
+      }
+      stack.push(token);
+    }
+    if (token.type === "operator") {
+      while (
+        !stack.isEmpty() &&
         (
           (stack.peek()!.precedence! > token.precedence!) ||
           (stack.peek()!.precedence! === token.precedence! &&
@@ -40,3 +53,6 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
   }
   return output;
 }
+console.log(ShuntingYard(new Tokens("-32+52*-(22-82)^22/-42")));
+
+//  -3 5 * + 2 8 - 2 ^ -4 / -
