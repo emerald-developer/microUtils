@@ -54,7 +54,7 @@
 
     <div class="btn btn-ghost text-xl text-white hidden lg:flex">
       <img class="w-[1.5rem] h-[1.5rem]" src="/favicon.png" alt="" />
-      <p>ToolKit</p>
+      <p>microUtils</p>
     </div>
   </div>
   <div class="navbar-center hidden lg:flex">
