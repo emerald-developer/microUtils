@@ -53,6 +53,18 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
   }
   return output;
 }
-console.log(ShuntingYard(new Tokens("-32+52*-(22-82)^22/-42")));
-
-//  -3 5 * + 2 8 - 2 ^ -4 / -
+let x=(ShuntingYard(new Tokens("-32+52*(-(22-82)^2)/-42")));
+let temp=""
+for (const token of x!) {
+  temp += token.value + " ";
+}
+console.log(temp);
+/*
+-32 52 22 82 - _ 2 ^ * -42 / +
+-32 53 -60 _ 2 ^ * -42 /+
+-32 53 60 2 ^ * -42 / +
+-32 53 (60^2) * -42 / +
+-32 52 * (60^2) -42/+
+-32 (52*(60^2))/-42 +
+-32 + (52*(60^2))/-42
+*/
