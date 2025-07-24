@@ -1,6 +1,5 @@
 import { Stack, Token, Tokens } from "./dataStructures";
 
-
 export function ShuntingYard(tokens: Tokens): Token[] | undefined {
   const output: Token[] = [];
   const stack = new Stack<Token>();
@@ -24,11 +23,9 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
       while (
         !stack.isEmpty() &&
         stack.peek()?.type === "operator" &&
-        (
-          (stack.peek()!.precedence! > token.precedence!) ||
+        (stack.peek()!.precedence! > token.precedence! ||
           (stack.peek()!.precedence! === token.precedence! &&
-            token.associativity === "left") // Your existing left-associative check is fine here.
-        )
+            token.associativity === "left")) // Your existing left-associative check is fine here.
       ) {
         output.push(stack.pop()!);
       }
@@ -37,11 +34,9 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
     if (token.type === "operator") {
       while (
         !stack.isEmpty() &&
-        (
-          (stack.peek()!.precedence! > token.precedence!) ||
+        (stack.peek()!.precedence! > token.precedence! ||
           (stack.peek()!.precedence! === token.precedence! &&
-            token.associativity === "left")
-        )
+            token.associativity === "left"))
       ) {
         output.push(stack.pop()!);
       }
@@ -49,22 +44,22 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
     }
   }
   while (!stack.isEmpty()) {
-    output.push(stack.pop()!);
+    const t = stack.pop()!;
+    if (t.type === "leftParenthesis" || t.type === "rightParenthesis") {
+      throw new Error("Mismatched parentheses");
+    }
+    output.push(t);
   }
   return output;
 }
-let x=(ShuntingYard(new Tokens("-32+52*(-(22-82)^2)/-42")));
-let temp=""
-for (const token of x!) {
-  temp += token.value + " ";
+
+function testShuntingyard(expr: string): void {
+  const tokens =ShuntingYard( new Tokens(expr));
+  if (tokens) {
+  console.log(`Expression: ${expr}`);
+  console.log(
+    "Tokens:",
+    tokens.map((t) => `${t.value}`).join(", ")
+  );
+  }
 }
-console.log(temp);
-/*
--32 52 22 82 - _ 2 ^ * -42 / +
--32 53 -60 _ 2 ^ * -42 /+
--32 53 60 2 ^ * -42 / +
--32 53 (60^2) * -42 / +
--32 52 * (60^2) -42/+
--32 (52*(60^2))/-42 +
--32 + (52*(60^2))/-42
-*/

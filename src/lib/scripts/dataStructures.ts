@@ -30,9 +30,8 @@ export class Token {
       case "/":
         return 3;
       case "^":
+        case "_":
         return 4;
-      case "_":
-        return 5;
       default:
         return 0;
     }
@@ -122,9 +121,12 @@ export class Tokens {
   }
 }
 
-let x=new Tokens("-32+52*(-(22-82)^2)/-42");
-let temp=""
-for (const token of x.tokens) {
-  temp += token.value + " ";
+function testTokenization(expr: string): void {
+  const tokens = new Tokens(expr);
+  console.log(`Expression: ${expr}`);
+  console.log(
+    "Tokens:",
+    tokens.tokens.map((t) => `${t.value}(${t.type})`).join(", ")
+  );
 }
-console.log(temp);
+
