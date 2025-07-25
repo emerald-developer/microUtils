@@ -1,6 +1,6 @@
 import { Token } from "./dataStructures";
 
-function solveRPN(tokens: Token[]): number | string {
+export function solveRPN(tokens: Token[]): number | string {
   let solvedStack:Array<number | string> = [];
   for (const token of tokens) {
     if (token.type === "number") {
@@ -37,6 +37,9 @@ function solveRPN(tokens: Token[]): number | string {
         solvedStack.push(-Number(a));
       }
     }
+  }
+  if (solvedStack.length>1){
+    throw new Error("invalid expression given as input")
   }
   return solvedStack.pop()!;
 }
