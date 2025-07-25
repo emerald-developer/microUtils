@@ -1,15 +1,15 @@
-function generatePassword(length: number, hasNumbers: boolean, hasSymbols: boolean, upperCase:boolean , lowerCase:boolean): string {
+export function generatePassword(length: number, passwordOptions :{ hasNumbers: boolean, hasSymbols: boolean, upperCase:boolean , lowerCase:boolean}): string {
   let charset = '';
-  if (lowerCase) {
+  if (passwordOptions.lowerCase) {
     charset += 'abcdefghijklmnopqrstuvwxyz';
   }
-  if (upperCase) {
+  if (passwordOptions.upperCase) {
     charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   }
-  if (hasNumbers) {
+  if (passwordOptions.hasNumbers) {
     charset += '0123456789';
   }
-  if (hasSymbols) {
+  if (passwordOptions.hasSymbols) {
     charset += '!@#$%^&*()_+[]{}|;:,.<>?';
   }
   //if charset is empty :

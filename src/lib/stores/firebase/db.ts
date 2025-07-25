@@ -15,13 +15,20 @@ const db = getFirestore(get(firebaseStore).app);
  * @returns A Promise that resolves when the note has been saved.
  */
 export async function saveUserNote(uid: string, data: string, extraPassword?: string): Promise<void> {
-    const noteRef = doc(db, 'users', uid, 'note', 'data');
-    if (extraPassword) {
-        data = await encrypt(data, extraPassword + uid);
-    } else {
-        data = await encrypt(data, uid);
+    try {
+        if (!uid) throw new Error('UID must be provided.');
+        if (!data) throw new Error('Note data must be provided.');
+        const noteRef = doc(db, 'users', uid, 'note', 'data');
+        if (extraPassword) {
+            data = await encrypt(data, extraPassword + uid);
+        } else {
+            data = await encrypt(data, uid);
+        }
+        await setDoc(noteRef, { content: data }, { merge: true });
+    } catch (e:any) {
+        console.error(`Failed to save user note: ${e.message}`);
+        throw e;
     }
-    await setDoc(noteRef, { content: data }, { merge: true });
 }
 
 /**
@@ -49,22 +56,34 @@ export async function getUserNote(uid: string, extraPassword?: string): Promise<
 /**
  * Saves a user's todo list to Firestore
  *
+ *
+ * The todo list are stored by name, and the data is not encrypted.
+ *
  * @param uid - The user's unique identifier.
+ * @param name - The todo list name.
  * @param data - An object containing the todo list content to be saved.
  * @returns A Promise that resolves when the todo list has been saved.
  */
-export async function saveUserTodo(uid: string, data: string): Promise<void> {
-    const todoRef = doc(db, 'users', uid, 'todo', 'data');
+export async function saveUserTodo(uid: string, name:string, data: string): Promise<void> {
+    if (!uid) throw new Error('UID must be provided.');
+    if (!name) throw new Error('Todo name must be provided.');
+    if (!data) throw new Error('Todo data must be provided.');
+    const todoRef = doc(db, 'users', uid, 'todos', name , 'data');
     await setDoc(todoRef, { content: data }, { merge: true });
 }
 
 /**
  * Retrieve user todo list from Firestore
+ *
  * @param uid User's UID
+ *
+ * The returned todo data is not decrypted.
+ *
+ * If user or todo does not exist, returns null.
  * @returns Todo list content or null if not found
  */
-export async function getUserTodo(uid: string): Promise<{ content: string } | null> {
-    const todoRef = doc(db, 'users', uid, 'todo', 'data');
+export async function getUserTodo(uid: string, name:string): Promise<{ content: string } | null> {
+    const todoRef = doc(db, 'users', uid, 'todos', name , 'data');
     const docSnap = await getDoc(todoRef);
     if (docSnap.exists()) {
         let data = docSnap.data();
@@ -73,4 +92,3 @@ export async function getUserTodo(uid: string): Promise<{ content: string } | nu
         return null;
     }
 }
-
