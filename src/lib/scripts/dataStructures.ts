@@ -20,7 +20,7 @@ export class Token {
     this.precedence = this.getPrecedence();
     this.associativity = this.getAssociativity();
   }
-  
+
   private getPrecedence(): number {
     switch (this.value) {
       case "+":
@@ -30,7 +30,7 @@ export class Token {
       case "/":
         return 3;
       case "^":
-      case "_":
+        case "_":
         return 4;
       default:
         return 0;
@@ -105,7 +105,7 @@ export class Tokens {
                 } else {
                     tokens.push(new Token(input[i]));
                 }
-                
+
             }
             else if ("+/*^()".indexOf(input[i]) !== -1) {
                 tokens.push(new Token(input[i]));
@@ -121,11 +121,11 @@ export class Tokens {
   }
 }
 
-let x=new Tokens("-3+5*-(2-8)^2/-4");
-let temp=""
-for (const token of x.tokens) {
-  temp += token.value + " ";
+function testTokenization(expr: string): void {
+  const tokens = new Tokens(expr);
+  console.log(`Expression: ${expr}`);
+  console.log(
+    "Tokens:",
+    tokens.tokens.map((t) => `${t.value}(${t.type})`).join(", ")
+  );
 }
-console.log(temp);
-
-// -3 + 5 * - ( 2 - 8 ) ^ 2 / -4

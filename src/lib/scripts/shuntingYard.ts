@@ -23,8 +23,7 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
       while (
         !stack.isEmpty() &&
         stack.peek()?.type === "operator" &&
-        (
-          (stack.peek()!.precedence! > token.precedence!) ||
+        (stack.peek()!.precedence! > token.precedence! ||
           (stack.peek()!.precedence! === token.precedence! &&
             token.associativity === "left")
         )
@@ -36,11 +35,9 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
     if (token.type === "operator") {
       while (
         !stack.isEmpty() &&
-        (
-          (stack.peek()!.precedence! > token.precedence!) ||
+        (stack.peek()!.precedence! > token.precedence! ||
           (stack.peek()!.precedence! === token.precedence! &&
-            token.associativity === "left")
-        )
+            token.associativity === "left"))
       ) {
         output.push(stack.pop()!);
       }
@@ -48,7 +45,23 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
     }
   }
   while (!stack.isEmpty()) {
-    output.push(stack.pop()!);
+    const t = stack.pop()!;
+    if (t.type === "leftParenthesis" || t.type === "rightParenthesis") {
+      throw new Error("Mismatched parentheses");
+    }
+    output.push(t);
   }
   return output;
+}
+
+
+function testShuntingyard(expr: string): void {
+  const tokens =ShuntingYard( new Tokens(expr));
+  if (tokens) {
+  console.log(`Expression: ${expr}`);
+  console.log(
+    "Tokens:",
+    tokens.map((t) => `${t.value}`).join(", ")
+  );
+  }
 }
