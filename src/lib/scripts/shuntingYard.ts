@@ -25,7 +25,8 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
         stack.peek()?.type === "operator" &&
         (stack.peek()!.precedence! > token.precedence! ||
           (stack.peek()!.precedence! === token.precedence! &&
-            token.associativity === "left")) // Your existing left-associative check is fine here.
+            token.associativity === "left")
+        )
       ) {
         output.push(stack.pop()!);
       }
@@ -52,6 +53,7 @@ export function ShuntingYard(tokens: Tokens): Token[] | undefined {
   }
   return output;
 }
+
 
 function testShuntingyard(expr: string): void {
   const tokens =ShuntingYard( new Tokens(expr));

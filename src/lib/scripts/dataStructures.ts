@@ -129,4 +129,3 @@ function testTokenization(expr: string): void {
     tokens.tokens.map((t) => `${t.value}(${t.type})`).join(", ")
   );
 }
-
