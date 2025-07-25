@@ -121,7 +121,7 @@ export class Tokens {
   }
 }
 
-let x=new Tokens("-32+52*-(22-82)^22/-42");
+let x=new Tokens("-3+5*-(2-8)^2/-4");
 let temp=""
 for (const token of x.tokens) {
   temp += token.value + " ";
