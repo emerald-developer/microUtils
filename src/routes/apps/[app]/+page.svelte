@@ -11,7 +11,8 @@
   import Encrypt from "./encrypt.svelte";
   import Randomize from "./randomize.svelte";
   import ColorPicker from "./colorpicker.svelte";
-  import Todo from "./todo.svelte";
+  import Password from "./password.svelte";
+
 
   onMount(() => {
     if (
@@ -28,6 +29,7 @@
         "qrcode",
         "expense",
         "encrypt",
+        "password"
       ].includes(app)
     ) {
       goto("/errors/404");
@@ -39,6 +41,9 @@
   <Bmi />
 {:else if app == "note"}
   <Note />
+{:else if app == "password"}
+  <Password />
+{:else}
 {:else if app == "compress"}
   <Compress />
 {:else if app == "encrypt"}

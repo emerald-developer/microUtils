@@ -76,6 +76,13 @@
                 cardDescription="Manage your tasks"
             />
         </a>
+        <a href="/apps/password">
+            <Card
+                badgeType="utility"
+                cardTitle="Password Generator"
+                cardDescription="Generate a password"
+            />
+        </a>
     </div>
 </div>
 

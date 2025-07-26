@@ -1,11 +1,27 @@
 <script lang="ts">
-  import greeting from "$lib/scripts/greeting";
+  /**
+   * Generates a time-based greeting (Good morning, Good afternoon, or Good evening).
+   *
+   * @returns {string} The time-based greeting followed by an exclamation mark.
+   */
+
+  function greeting() {
+    const now = new Date();
+    const hours = now.getHours();
+
+    let timeBasedGreeting: string;
+    if (hours < 12) {
+      timeBasedGreeting = "Good morning";
+    } else if (hours < 18) {
+      timeBasedGreeting = "Good afternoon";
+    } else {
+      timeBasedGreeting = "Good evening";
+    }
+    return `${timeBasedGreeting}!`;
+  }
 </script>
 
-<div
-  class="hero flex-grow"
-  style="background-image: url(/blob-scene.svg);"
->
+<div class="hero flex-grow" style="background-image: url(/blob-scene.svg);">
   <div class="hero-overlay"></div>
   <div class="hero-content text-neutral-content text-center">
     <div
@@ -33,20 +49,20 @@
 </div>
 
 <style>
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-move 3s ease-in-out infinite;
-}
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-move 3s ease-in-out infinite;
+  }
 
-@keyframes gradient-move {
-  0% {
-    background-position: 0% 50%;
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 </style>
