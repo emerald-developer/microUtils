@@ -28,7 +28,7 @@
     loading = true;
     try {
       if (!currentUser) return; // Ensure currentUser is not null before proceeding
-      const res = await getUserTodo(currentUser.uid, name);
+      const res = await getUserTodo(currentUser.uid);
       if (res && res.content) {
         todos = JSON.parse(res.content);
       } else {
@@ -55,7 +55,7 @@
     saveTimeout = setTimeout(async () => {
       if (!currentUser) return;
       try {
-        await saveUserTodo(currentUser.uid, name, JSON.stringify(todos));
+        await saveUserTodo(currentUser.uid, JSON.stringify(todos));
       } catch (e) {
         console.error("Failed to save todos:", e);
       }
