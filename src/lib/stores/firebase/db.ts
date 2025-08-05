@@ -64,11 +64,10 @@ export async function getUserNote(uid: string, extraPassword?: string): Promise<
  * @param data - An object containing the todo list content to be saved.
  * @returns A Promise that resolves when the todo list has been saved.
  */
-export async function saveUserTodo(uid: string, name:string, data: string): Promise<void> {
+export async function saveUserTodo(uid: string, data: string): Promise<void> {
     if (!uid) throw new Error('UID must be provided.');
-    if (!name) throw new Error('Todo name must be provided.');
     if (!data) throw new Error('Todo data must be provided.');
-    const todoRef = doc(db, 'users', uid, 'todos', name , 'data');
+    const todoRef = doc(db, 'users', uid, 'todos', 'data');
     await setDoc(todoRef, { content: data }, { merge: true });
 }
 
@@ -82,8 +81,8 @@ export async function saveUserTodo(uid: string, name:string, data: string): Prom
  * If user or todo does not exist, returns null.
  * @returns Todo list content or null if not found
  */
-export async function getUserTodo(uid: string, name:string): Promise<{ content: string } | null> {
-    const todoRef = doc(db, 'users', uid, 'todos', name , 'data');
+export async function getUserTodo(uid: string): Promise<{ content: string } | null> {
+    const todoRef = doc(db, 'users', uid, 'todos', 'data');
     const docSnap = await getDoc(todoRef);
     if (docSnap.exists()) {
         let data = docSnap.data();

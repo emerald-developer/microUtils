@@ -70,12 +70,19 @@
                 cardDescription="Pick a color"
             />
         </a>
+        <a href="/apps/todo">
+            <Card
+                badgeType="utility"
+                cardTitle="Todo"
+                cardDescription="Manage your tasks"
+            />
+        </a>
         <a href="/apps/password">
             <Card
                 badgeType="utility"
                 cardTitle="Password Generator"
                 cardDescription="Generate a password"
             />
-      </a>
+        </a>
     </div>
 </div>
