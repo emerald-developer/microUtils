@@ -69,6 +69,13 @@
                 cardDescription="Pick a color"
             />
         </a>
+        <a href="/apps/todo">
+            <Card
+                badgeType="utility"
+                cardTitle="Todo"
+                cardDescription="Manage your tasks"
+            />
+        </a>
         <a href="/apps/password">
             <Card
                 badgeType="utility"
@@ -76,7 +83,6 @@
                 cardDescription="Generate a password"
             />
         </a>
-
     </div>
 </div>
 
