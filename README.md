@@ -1,6 +1,8 @@
-# App Kit
+# MicroUtils
 
 **App Kit** is a collection of everyday applications built with [SvelteKit](https://kit.svelte.dev/). It aims to provide useful tools and utilities in a single, easy-to-use package.
+
+#### [preview](https://microutils.vercel.app)
 
 ## Features
 
